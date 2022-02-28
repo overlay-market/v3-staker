@@ -219,7 +219,7 @@ describe('unit/Deposits', () => {
 
   describe('#onERC721Received', () => {
     const incentiveKeyAbi =
-      'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee)'
+      'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee, int24 tickLowerBound, int24 tickUpperBound)'
     let tokenId: BigNumberish
     let data: string
     let timestamps: ContractParams.Timestamps
