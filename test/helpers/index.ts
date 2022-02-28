@@ -116,6 +116,8 @@ export class HelperCommands {
         rewardToken: params.rewardToken.address,
         ...times,
         refundee: params.refundee || incentiveCreator.address,
+        tickLowerBound: params.tickLowerBound,
+        tickUpperBound: params.tickUpperBound
       },
       params.totalReward
     )
