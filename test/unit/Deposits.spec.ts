@@ -105,6 +105,8 @@ describe('unit/Deposits', () => {
         poolAddress: context.poolObj.address,
         startTime,
         totalReward,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
       })
 
       await Time.setAndMine(startTime + 1)
@@ -154,6 +156,8 @@ describe('unit/Deposits', () => {
         poolAddress: context.poolObj.address,
         startTime: createIncentiveResult.startTime + 100,
         totalReward,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
       })
 
       await Time.setAndMine(createIncentiveResult2.startTime)
@@ -249,6 +253,8 @@ describe('unit/Deposits', () => {
         rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       })
 
@@ -281,6 +287,8 @@ describe('unit/Deposits', () => {
           startTime: timestamps.startTime,
           endTime: timestamps.endTime,
           refundee: incentiveCreator.address,
+          tickLowerBound: context.tickLowerBound,
+          tickUpperBound: context.tickUpperBound,
         })
         await Time.set(timestamps.startTime + 10)
         const stakeBefore = await context.staker.stakes(tokenId, incentiveId)
@@ -398,6 +406,8 @@ describe('unit/Deposits', () => {
           rewardToken: context.rewardToken,
           totalReward,
           poolAddress: context.poolObj.address,
+          tickLowerBound: context.tickLowerBound,
+          tickUpperBound: context.tickUpperBound,
           ...timestamps,
         }
         const incentive = await helpers.createIncentiveFlow(incentiveParams)
