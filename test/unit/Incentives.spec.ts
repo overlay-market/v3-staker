@@ -91,7 +91,9 @@ describe('unit/Incentives', async () => {
             startTime,
             endTime,
             incentiveCreator.address,
-            totalReward
+            totalReward,
+            context.tickLowerBound,
+            context.tickUpperBound
           )
       })
 

@@ -116,7 +116,7 @@ contract UniswapV3Staker is IUniswapV3Staker, Multicall {
 
         TransferHelperExtended.safeTransferFrom(address(key.rewardToken), msg.sender, address(this), reward);
 
-        emit IncentiveCreated(key.rewardToken, key.pool, key.startTime, key.endTime, key.refundee, reward);
+        emit IncentiveCreated(key.rewardToken, key.pool, key.startTime, key.endTime, key.refundee, reward, key.tickLowerBound, key.tickUpperBound);
     }
 
     /// @inheritdoc IUniswapV3Staker
