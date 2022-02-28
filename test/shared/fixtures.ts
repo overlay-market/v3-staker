@@ -1,3 +1,4 @@
+import { FeeAmount } from './external/v3-periphery/constants';
 import { Fixture } from 'ethereum-waffle'
 import { constants } from 'ethers'
 import { ethers, waffle } from 'hardhat'
@@ -21,7 +22,7 @@ import {
   TestIncentiveId,
 } from '../../typechain'
 import { NFTDescriptor } from '../../types/NFTDescriptor'
-import { FeeAmount, BigNumber, encodePriceSqrt, MAX_GAS_LIMIT } from '../shared'
+import { BigNumber, encodePriceSqrt, MAX_GAS_LIMIT, getMinTick, getMaxTick, TICK_SPACINGS } from '../shared'
 import { ActorFixture } from './actors'
 
 type WETH9Fixture = { weth9: IWETH9 }
@@ -212,6 +213,8 @@ export type UniswapFixtureType = {
   token0: TestERC20
   token1: TestERC20
   rewardToken: TestERC20
+  tickLowerBound: number
+  tickUpperBound: number
 }
 export const uniswapFixture: Fixture<UniswapFixtureType> = async (wallets, provider) => {
   const { tokens, nft, factory, router } = await uniswapFactoryFixture(wallets, provider)
@@ -237,6 +240,10 @@ export const uniswapFixture: Fixture<UniswapFixtureType> = async (wallets, provi
 
   const poolObj = poolFactory.attach(pool01) as IUniswapV3Pool
 
+  const tickLowerBound = getMinTick(TICK_SPACINGS[FeeAmount.MEDIUM]);
+
+  const tickUpperBound = getMaxTick(TICK_SPACINGS[FeeAmount.HIGH]);
+
   return {
     nft,
     router,
@@ -251,6 +258,8 @@ export const uniswapFixture: Fixture<UniswapFixtureType> = async (wallets, provi
     token0: tokens[0],
     token1: tokens[1],
     rewardToken: tokens[2],
+    tickLowerBound,
+    tickUpperBound
   }
 }
 

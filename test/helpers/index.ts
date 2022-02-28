@@ -317,6 +317,8 @@ export class HelperCommands {
       startTime: params.startTime,
       endTime: params.endTime,
       refundee: params.refundee,
+      tickLowerBound: params.tickLowerBound,
+      tickUpperBound: params.tickUpperBound
     })
   }
 

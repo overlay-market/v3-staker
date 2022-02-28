@@ -89,6 +89,8 @@ describe('unit/Stakes', () => {
         rewardToken: context.rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       }
 
