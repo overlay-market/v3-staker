@@ -102,6 +102,8 @@ describe('unit/Stakes', () => {
             refundee: incentiveCreator.address,
             pool: context.pool01,
             rewardToken: context.rewardToken.address,
+            tickLowerBound: context.tickLowerBound,
+            tickUpperBound: context.tickUpperBound,
             ...timestamps,
           },
           _tokenId
@@ -237,6 +239,8 @@ describe('unit/Stakes', () => {
               refundee: incentiveCreator.address,
               pool: context.pool01,
               rewardToken: context.rewardToken.address,
+              tickLowerBound: context.tickLowerBound,
+              tickUpperBound: context.tickUpperBound,
               ...timestamps,
             },
             otherTokenId
@@ -253,6 +257,8 @@ describe('unit/Stakes', () => {
               refundee: incentiveCreator.address,
               pool: context.pool01,
               rewardToken: context.rewardToken.address,
+              tickLowerBound: context.tickLowerBound,
+              tickUpperBound: context.tickUpperBound,
               ...timestamps,
               startTime: timestamps.startTime + 10,
             },
@@ -297,6 +303,8 @@ describe('unit/Stakes', () => {
         refundee: incentiveCreator.address,
         rewardToken: context.rewardToken.address,
         pool: context.pool01,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       }
 
@@ -305,6 +313,8 @@ describe('unit/Stakes', () => {
           rewardToken: context.rewardToken,
           totalReward,
           poolAddress: context.poolObj.address,
+          tickLowerBound: context.tickLowerBound,
+          tickUpperBound: context.tickUpperBound,
           ...timestamps,
         })
       )
@@ -368,6 +378,8 @@ describe('unit/Stakes', () => {
         rewardToken: context.rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       })
 
@@ -388,6 +400,8 @@ describe('unit/Stakes', () => {
           refundee: incentiveCreator.address,
           rewardToken: context.rewardToken.address,
           pool: context.pool01,
+          tickLowerBound: context.tickLowerBound,
+          tickUpperBound: context.tickUpperBound,
           ...timestamps,
         },
         tokenId
@@ -488,6 +502,8 @@ describe('unit/Stakes', () => {
         rewardToken: context.rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       })
 
@@ -523,6 +539,8 @@ describe('unit/Stakes', () => {
           refundee: incentiveCreator.address,
           rewardToken: context.rewardToken.address,
           pool: context.pool01,
+          tickLowerBound: context.tickLowerBound,
+          tickUpperBound: context.tickUpperBound,
           ...timestamps,
         },
         tokenId
@@ -536,6 +554,8 @@ describe('unit/Stakes', () => {
             refundee: incentiveCreator.address,
             pool: context.pool01,
             rewardToken: context.rewardToken.address,
+            tickLowerBound: context.tickLowerBound,
+            tickUpperBound: context.tickUpperBound,
             ...timestamps,
           },
           tokenId
@@ -635,6 +655,8 @@ describe('unit/Stakes', () => {
         rewardToken: context.rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
+        tickLowerBound: context.tickLowerBound,
+        tickUpperBound: context.tickUpperBound,
         ...timestamps,
       })
       incentiveId = await helpers.getIncentiveId(incentive)
