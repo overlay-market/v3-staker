@@ -51,7 +51,7 @@ describe('unit/Deposits', () => {
 
   const SAFE_TRANSFER_FROM_SIGNATURE = 'safeTransferFrom(address,address,uint256,bytes)'
   const INCENTIVE_KEY_ABI =
-    'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee)'
+    'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee, int24 tickLowerBound, int24 tickUpperBound)'
 
   beforeEach(async () => {
     await erc20Helper.ensureBalancesAndApprovals(
