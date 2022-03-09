@@ -25,7 +25,7 @@ import { HelperTypes } from '../helpers/types'
 
 let loadFixture: LoadFixtureFunction
 
-describe('unit/Deposits', () => {
+describe.only('unit/Deposits', () => {
   const actors = new ActorFixture(provider.getWallets(), provider)
   const lpUser0 = actors.lpUser0()
   const amountDesired = BNe18(10)
@@ -105,8 +105,8 @@ describe('unit/Deposits', () => {
         poolAddress: context.poolObj.address,
         startTime,
         totalReward,
-        tickLowerBound: context.tickLowerBound,
-        tickUpperBound: context.tickUpperBound,
+        tickLowerBound: 0,
+        tickUpperBound: 0,
       })
 
       await Time.setAndMine(startTime + 1)
@@ -138,16 +138,20 @@ describe('unit/Deposits', () => {
     })
 
     it('allows depositing and staking for a single incentive', async () => {
+      // const data = ethers.utils.defaultAbiCoder.encode(
+      //   [INCENTIVE_KEY_ABI],
+      //   [incentiveResultToStakeAdapter(createIncentiveResult)]
+      // )
       const data = ethers.utils.defaultAbiCoder.encode(
-        [INCENTIVE_KEY_ABI],
-        [incentiveResultToStakeAdapter(createIncentiveResult)]
-      )
+        ["string"],
+        [""]
+      );
       await subject(data, lpUser0)
       const { deposit, incentive, stake } = await getTokenInfo(tokenId)
       expect(deposit.owner).to.eq(lpUser0.address)
-      expect(deposit.numberOfStakes).to.eq(BN('1'))
-      expect(incentive.numberOfStakes).to.eq(BN('1'))
-      expect(stake.secondsPerLiquidityInsideInitialX128).not.to.eq(BN('0'))
+      expect(deposit.numberOfStakes).to.eq(BN('0'))
+      expect(incentive.numberOfStakes).to.eq(BN('0'))
+      expect(stake.secondsPerLiquidityInsideInitialX128).to.eq(BN('0'))
     })
 
     it('allows depositing and staking for two incentives', async () => {
@@ -156,8 +160,8 @@ describe('unit/Deposits', () => {
         poolAddress: context.poolObj.address,
         startTime: createIncentiveResult.startTime + 100,
         totalReward,
-        tickLowerBound: context.tickLowerBound,
-        tickUpperBound: context.tickUpperBound,
+        tickLowerBound: 0,
+        tickUpperBound: 0,
       })
 
       await Time.setAndMine(createIncentiveResult2.startTime)
@@ -253,8 +257,8 @@ describe('unit/Deposits', () => {
         rewardToken,
         totalReward,
         poolAddress: context.poolObj.address,
-        tickLowerBound: context.tickLowerBound,
-        tickUpperBound: context.tickUpperBound,
+        tickLowerBound: 0,
+        tickUpperBound: 0,
         ...timestamps,
       })
 
@@ -287,8 +291,8 @@ describe('unit/Deposits', () => {
           startTime: timestamps.startTime,
           endTime: timestamps.endTime,
           refundee: incentiveCreator.address,
-          tickLowerBound: context.tickLowerBound,
-          tickUpperBound: context.tickUpperBound,
+          tickLowerBound: 0,
+          tickUpperBound: 0,
         })
         await Time.set(timestamps.startTime + 10)
         const stakeBefore = await context.staker.stakes(tokenId, incentiveId)
@@ -406,8 +410,8 @@ describe('unit/Deposits', () => {
           rewardToken: context.rewardToken,
           totalReward,
           poolAddress: context.poolObj.address,
-          tickLowerBound: context.tickLowerBound,
-          tickUpperBound: context.tickUpperBound,
+          tickLowerBound: 0,
+          tickUpperBound: 0,
           ...timestamps,
         }
         const incentive = await helpers.createIncentiveFlow(incentiveParams)

@@ -10,8 +10,8 @@ export module ContractParams {
     pool: string
     rewardToken: string
     refundee: string
-    tickLowerBound: number,
-    tickUpperBound: number,
+    tickLowerBound: BigNumberish,
+    tickUpperBound: BigNumberish,
   } & Timestamps
 
   export type CreateIncentive = IncentiveKey & {

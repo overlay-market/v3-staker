@@ -77,8 +77,8 @@ describe('integration', async () => {
         rewardToken,
         poolAddress: context.pool01,
         totalReward,
-        tickLowerBound: context.tickLowerBound,
-        tickUpperBound: context.tickUpperBound,
+        tickLowerBound: 0,
+        tickUpperBound: 0,
       })
 
       const params = {
@@ -464,8 +464,8 @@ describe('integration', async () => {
         rewardToken: context.rewardToken,
         poolAddress: context.pool01,
         totalReward,
-        tickLowerBound: context.tickLowerBound,
-        tickUpperBound: context.tickUpperBound,
+        tickLowerBound: 0,
+        tickUpperBound: 0,
       })
 
       return {
