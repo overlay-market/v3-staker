@@ -162,16 +162,16 @@ contract UniswapV3Staker is IUniswapV3Staker, Multicall {
         deposits[tokenId] = Deposit({owner: from, numberOfStakes: 0, tickLower: tickLower, tickUpper: tickUpper});
         emit DepositTransferred(tokenId, address(0), from);
 
-        if (data.length > 0) {
-            if (data.length == 160) {
-                _stakeToken(abi.decode(data, (IncentiveKey)), tokenId);
-            } else {
-                IncentiveKey[] memory keys = abi.decode(data, (IncentiveKey[]));
-                for (uint256 i = 0; i < keys.length; i++) {
-                    _stakeToken(keys[i], tokenId);
-                }
-            }
-        }
+        // if (data.length > 0) {
+        //     if (data.length == 160) {
+        //         _stakeToken(abi.decode(data, (IncentiveKey)), tokenId);
+        //     } else {
+        //         IncentiveKey[] memory keys = abi.decode(data, (IncentiveKey[]));
+        //         for (uint256 i = 0; i < keys.length; i++) {
+        //             _stakeToken(keys[i], tokenId);
+        //         }
+        //     }
+        // }
         return this.onERC721Received.selector;
     }
 
