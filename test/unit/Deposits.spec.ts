@@ -25,7 +25,7 @@ import { HelperTypes } from '../helpers/types'
 
 let loadFixture: LoadFixtureFunction
 
-describe('unit/Deposits', () => {
+describe.only('unit/Deposits', () => {
   const actors = new ActorFixture(provider.getWallets(), provider)
   const lpUser0 = actors.lpUser0()
   const amountDesired = BNe18(10)
@@ -51,7 +51,7 @@ describe('unit/Deposits', () => {
 
   const SAFE_TRANSFER_FROM_SIGNATURE = 'safeTransferFrom(address,address,uint256,bytes)'
   const INCENTIVE_KEY_ABI =
-    'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee, int24 tickLowerBound, int24 tickUpperBound)'
+    'tuple(address rewardToken, address pool, uint256 startTime, uint256 endTime, address refundee)'
 
   beforeEach(async () => {
     await erc20Helper.ensureBalancesAndApprovals(
@@ -106,7 +106,7 @@ describe('unit/Deposits', () => {
         startTime,
         totalReward,
         tickLowerBound: 0,
-        tickUpperBound: 0,
+        tickUpperBound: 100,
       })
 
       await Time.setAndMine(startTime + 1)
@@ -138,20 +138,29 @@ describe('unit/Deposits', () => {
     })
 
     it('allows depositing and staking for a single incentive', async () => {
-      // const data = ethers.utils.defaultAbiCoder.encode(
-      //   [INCENTIVE_KEY_ABI],
-      //   [incentiveResultToStakeAdapter(createIncentiveResult)]
-      // )
       const data = ethers.utils.defaultAbiCoder.encode(
-        ["string"],
-        [""]
-      );
+        [INCENTIVE_KEY_ABI],
+        [incentiveResultToStakeAdapter(createIncentiveResult)]
+      )
+      // const data = ethers.utils.defaultAbiCoder.encode(
+      //   ["string"],
+      //   [""]
+      // );
       await subject(data, lpUser0)
+
+      console.log('data: ', data);
+      console.log('lpUser0: ', lpUser0);
+      console.log('tokenId: ', tokenId);
       const { deposit, incentive, stake } = await getTokenInfo(tokenId)
+
+      console.log('deposit: ', deposit);
+      console.log('incentive: ', incentive);
+      console.log('stake: ', stake);
+
       expect(deposit.owner).to.eq(lpUser0.address)
-      expect(deposit.numberOfStakes).to.eq(BN('0'))
-      expect(incentive.numberOfStakes).to.eq(BN('0'))
-      expect(stake.secondsPerLiquidityInsideInitialX128).to.eq(BN('0'))
+      expect(deposit.numberOfStakes).to.eq(BN('1'))
+      expect(incentive.numberOfStakes).to.eq(BN('1'))
+      expect(stake.secondsPerLiquidityInsideInitialX128).not.to.eq(BN('0'))
     })
 
     it('allows depositing and staking for two incentives', async () => {

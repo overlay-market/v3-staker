@@ -13,8 +13,8 @@ export module HelperTypes {
       endTime?: number
       totalReward: BigNumber
       refundee?: string
-      tickLowerBound: BigNumberish
-      tickUpperBound: BigNumberish
+      tickLowerBound: any
+      tickUpperBound: any
     }
     export type Result = {
       poolAddress: string
@@ -23,8 +23,8 @@ export module HelperTypes {
       startTime: number
       endTime: number
       refundee: string
-      tickLowerBound: BigNumberish
-      tickUpperBound: BigNumberish
+      tickLowerBound: any
+      tickUpperBound: any
     }
 
     export type Command = CommandFunction<Args, Result>
