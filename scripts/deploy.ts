@@ -3,7 +3,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const uniswapV3Factory = "0x8cCD181113c7Ae40f31D5e8178a98A1A60B55c4C";
+  const uniswapV3Factory = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
   const nonfungiblePositionManager = "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
   console.log("Deploying contracts with the account:", deployer.address);
 
