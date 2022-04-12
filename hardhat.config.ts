@@ -6,6 +6,7 @@ import 'hardhat-contract-sizer'
 import { HardhatUserConfig } from 'hardhat/config'
 import { SolcUserConfig } from 'hardhat/types'
 import 'solidity-coverage'
+import dotenv from 'dotenv';
 
 const DEFAULT_COMPILER_SETTINGS: SolcUserConfig = {
   version: '0.7.6',
@@ -19,6 +20,10 @@ const DEFAULT_COMPILER_SETTINGS: SolcUserConfig = {
     },
   },
 }
+
+dotenv.config();
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "01234567890123456789";
 
 if (process.env.RUN_COVERAGE == '1') {
   /**
@@ -54,6 +59,7 @@ const config: HardhatUserConfig = {
     },
     kovan: {
       url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY]
     },
     arbitrumRinkeby: {
       url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
