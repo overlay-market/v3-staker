@@ -4,3 +4,7 @@ module.exports = [
   7776000,
   2592000
 ];
+
+// in order to verify via hardhat,
+// run command below in terminal
+// npx hardhat verify --network kovan  --constructor-args scripts/arguments.ts DEPLOYED_CONTRACT_ADDRESS
