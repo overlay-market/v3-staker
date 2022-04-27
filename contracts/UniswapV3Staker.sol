@@ -132,23 +132,13 @@ contract UniswapV3Staker is IUniswapV3Staker, Multicall {
 
     function createIncentiveWithMaxRange(
         IERC20Minimal rewardToken,
+        IUniswapV3Pool pool,
         uint256 startTime,
         uint256 endTime,
         address refundee,
-        uint256 reward,
-        address token0,
-        address token1,
-        uint24 fee
+        uint256 reward
     ) external override {
-        IUniswapV3Pool pool =
-            IUniswapV3Pool(
-                PoolAddress.computeAddress(
-                    address(factory),
-                    PoolAddress.PoolKey({token0: token0, token1: token1, fee: fee})
-                )
-            );
-
-        int24 tickSpacing = factory.feeAmountTickSpacing(fee);
+        int24 tickSpacing = factory.feeAmountTickSpacing(pool.fee());
         require(tickSpacing > 0, 'UniswapV3Staker::createIncentiveWithMaxRange: !fee');
 
         // full range max/min ticks for pool

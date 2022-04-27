@@ -95,13 +95,11 @@ interface IUniswapV3Staker is IERC721Receiver, IMulticall {
     /// @param reward The amount of reward tokens to be distributed
     function createIncentiveWithMaxRange(
         IERC20Minimal rewardToken,
+        IUniswapV3Pool pool,
         uint256 startTime,
         uint256 endTime,
         address refundee,
-        uint256 reward,
-        address token0,
-        address token1,
-        uint24 fee
+        uint256 reward
     ) external;
 
     /// @notice Ends an incentive after the incentive end time has passed and all stakes have been withdrawn
