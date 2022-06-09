@@ -13,8 +13,8 @@ async function main() {
   const _UniswapV3Staker = await UniswapV3Staker.deploy(
     uniswapV3Factory,
     nonfungiblePositionManager,
-    7776000,
-    2592000
+    2592000,
+    63072000
   );
 
   console.log("Staker address:", _UniswapV3Staker.address);
